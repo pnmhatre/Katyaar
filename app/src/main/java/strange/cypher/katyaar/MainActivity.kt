@@ -26,9 +26,5 @@ class MainActivity : FragmentActivity(){
         this.text = SpannableStringBuilder("")
         return value
     }
-    fun EditText.extract2(): String {
-        var value = this.text.toString()
-        this.text = SpannableStringBuilder("")
-        return value
-    }
+
 }
