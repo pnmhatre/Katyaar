@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
-
+apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'kotlin-android-extensions'
 kapt {
     generateStubs = true
@@ -15,6 +15,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        sourceSets {
+            main {
+                java.srcDirs = ['src/main/java', 'build/generated/source/greendao']
+            }
+        }
     }
     buildTypes {
         release {
@@ -23,20 +29,21 @@ android {
         }
     }
 }
-
+greendao {
+    schemaVersion 1
+}
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
-    compile "com.google.dagger:dagger:2.9"
+    compile 'com.google.dagger:dagger:2.9'
+    compile 'org.greenrobot:greendao:3.2.2'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.12'
     provided 'javax.annotation:jsr250-api:1.0'
     compile 'javax.inject:javax.inject:1'
-
-
+    implementation 'com.android.support:design:26.1.0'
 }
